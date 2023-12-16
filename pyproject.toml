@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "srcwarnings"
+version = "0.0.1"
+description = ""
+authors = ["Nikos Petalidis <npetalidis@dedaub.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+typer = {extras = ["all"], version = "^0.7.0"}
+python-dotenv = "^0.21.0"
+pydantic = "^1.10.4"
+aiohttp = "^3.8.5"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^0.991"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+srcwarnings = "srcwarnings.__main__:main"
+
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
