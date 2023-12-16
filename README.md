@@ -1,4 +1,4 @@
-# Watchdog srcup
+# Watchdog srcwarnings
 
 `srcwarnings` is Dedaub's utility CLI for retrieving a summary of your warnings from a project you previously uploaded 
 using `srcup` (see https://github.com/Dedaub/srcup`).
