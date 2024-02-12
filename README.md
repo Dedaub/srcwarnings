@@ -23,7 +23,7 @@ pipx upgrade srcwarnings
 
 ### For plain pip installation
 ```bash
-pip install --upgrade git+https://github.com/Dedaub/srcwarnings#egg=srcwarnigns
+pip install --upgrade git+https://github.com/Dedaub/srcwarnings#egg=srcwarnings
 ```
 
 ## Usage

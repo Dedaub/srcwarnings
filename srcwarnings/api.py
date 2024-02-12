@@ -5,7 +5,7 @@ from srcwarnings.models import Confidence, Severity
 
 HEADER = "You have {} warnings in your project.\n"
 REPORT_TEMPLATE = "* {} {} warning(s). ({} with MEDIUM PLUS or higher confidence and MEDIUM or higher severity)"
-FOOTER = "\nSee https://watchdog.dedaub.com/projects/{}_{} for detailed information"
+FOOTER = "\nSee https://app.dedaub.com/projects/{}_{} for detailed information"
 
 
 async def project_has_finished_processing(
@@ -66,7 +66,7 @@ async def generate_warning_report(warnings, project_id, version_id):
                         and Confidence[x['confidence'].replace(" ", "_")] >= Confidence.MEDIUM_PLUS
                         and Severity[x['severity'].replace(" ", "_")] >= Severity.MEDIUM,
                         warnings)))
-        report.append([warnings_per_kind, kind, serious_warnings_per_kind])
+        report.append([warnings_per_kind, kind if kind is not None else 'Unclassified type', serious_warnings_per_kind])
 
     return (HEADER.format(len(warnings))
             + '\n'.join([REPORT_TEMPLATE.format(*entry) for entry in report])

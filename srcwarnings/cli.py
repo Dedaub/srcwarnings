@@ -23,9 +23,9 @@ def single(
     period: int = typer.Option(30, help="Wait period for rechecking if project analysis has concluded"),
     api_url: str = typer.Option(
           "https://api.dedaub.com/api",
-        help="URL of the Watchdog API"
+        help="URL of the Dedaub API"
     ),
-    api_key: str = typer.Option(..., envvar="WD_API_KEY", help="Watchdog API key"),
+    api_key: str = typer.Option(..., envvar="WD_API_KEY", help="Dedaub API key"),
 ):
     asyncio.run(warnings_thread(api_url, api_key, project_id, version_id, period, timeout))
 
