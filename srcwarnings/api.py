@@ -25,7 +25,9 @@ async def project_has_finished_processing(
 
         if req.status == 200:
             stats = await req.json()
-            return not list(filter(lambda x: x['stage'] != 'COMPLETED' or x['success'] is False, stats))
+            failures = len(list(filter(lambda x: x['success'] is False, stats)))
+            total = len(stats)
+            return total, failures, not list(filter(lambda x: x['stage'] != 'COMPLETED', stats))
         else:
             error = await req.text()
             raise Exception(error)
