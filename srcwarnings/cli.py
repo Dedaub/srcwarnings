@@ -33,10 +33,12 @@ def single(
 async def warnings_thread(api_url: str, api_key: str, project_id: int, version_id: int, period: int, timeout: int):
     try:
         start_time = time.time()
-        analysis_has_finished = await project_has_finished_processing(api_url, api_key, project_id, version_id)
+        total, failures, analysis_has_finished = await project_has_finished_processing(api_url, api_key, project_id, version_id)
         while time.time() - start_time < timeout and not analysis_has_finished:
             time.sleep(period)
-            analysis_has_finished = await project_has_finished_processing(api_url, api_key, project_id, version_id)
+            total, failures, analysis_has_finished = await project_has_finished_processing(api_url, api_key, project_id, version_id)
+
+        print(f"NOTE: {failures} contract(s) out of {total} failed to be analysed")
 
         if analysis_has_finished:
             print(await get_project_warnings(api_url, api_key, project_id, version_id))
