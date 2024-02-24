@@ -38,8 +38,7 @@ async def warnings_thread(api_url: str, api_key: str, project_id: int, version_i
             time.sleep(period)
             total, failures, analysis_has_finished = await project_has_finished_processing(api_url, api_key, project_id, version_id)
 
-        if failures > 0:
-            print(f"NOTE: {failures} contract(s) out of {total} failed to be analysed")
+        print(f"NOTE: {failures} contract(s) out of {total} failed to be analysed")
 
         if analysis_has_finished:
             print(await get_project_warnings(api_url, api_key, project_id, version_id))
