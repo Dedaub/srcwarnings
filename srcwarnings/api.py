@@ -20,8 +20,10 @@ async def project_has_finished_processing(
 
         url = f"{watchdog_api}/project/{project_id}/version/{version_id}/stats"
 
+        params = {'analysis_type': 'SYMVALIC'}
+
         req = await session.get(
-            url=url)
+            url=url, params=params)
 
         if req.status == 200:
             stats = await req.json()

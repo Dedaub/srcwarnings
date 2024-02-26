@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "srcwarnings"
-version = "0.0.4"
+version = "0.0.5"
 description = ""
 authors = ["Nikos Petalidis <npetalidis@dedaub.com>"]
 readme = "README.md"
