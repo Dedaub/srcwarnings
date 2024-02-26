@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 
-
 import asyncio
 import builtins
 import sys
 
 import rich
-import typer
 import time
+import typer
+
+from packaging import version
 
 from srcwarnings.api import get_project_warnings, project_has_finished_processing
+from srcwarnings.utils import get_latest_app_version, version_callback, __version__
 
 app = typer.Typer()
 builtins.print = rich.print  # type: ignore
@@ -26,7 +28,19 @@ def single(
         help="URL of the Dedaub API"
     ),
     api_key: str = typer.Option(..., envvar="WD_API_KEY", help="Dedaub API key"),
+    app_version: bool = typer.Option(False, '--version', '-v', help="Show the version of the app", is_eager=True, callback=version_callback)
 ):
+    latest_app_version = asyncio.run(get_latest_app_version())
+    if not latest_app_version:
+        print("Warning: Failed to retrieve the latest available version of the app")
+
+    elif version.parse(__version__) < version.parse(latest_app_version):
+        print(f'Notice: A new version is available: {__version__} -> {latest_app_version}\n')
+        print(f'Please, update the app to continue:')
+        print(f'  For pipx installation run:      pipx upgrade srcwarnings')
+        print(f'  For plain pip installation run: pip install --upgrade git+ssh://github.com/Dedaub/srcwarnings#egg=srcwarnings')
+        return
+
     asyncio.run(warnings_thread(api_url, api_key, project_id, version_id, period, timeout))
 
 

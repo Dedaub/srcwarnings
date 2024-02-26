@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "srcwarnings"
-version = "0.0.3"
+version = "0.0.4"
 description = ""
 authors = ["Nikos Petalidis <npetalidis@dedaub.com>"]
 readme = "README.md"
@@ -11,6 +11,7 @@ typer = {extras = ["all"], version = "^0.7.0"}
 python-dotenv = "^0.21.0"
 pydantic = "^1.10.4"
 aiohttp = "^3.8.5"
+packaging = "^23.2"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^0.991"
